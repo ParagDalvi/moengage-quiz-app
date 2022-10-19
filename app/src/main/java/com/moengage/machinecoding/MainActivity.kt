@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeData() {
         quizViewModel.currentQuestionIndex.observe(this) {
             if (quizViewModel.quizInfo == null) return@observe
+
             if (it == quizViewModel.quizInfo?.questions!!.size) {
                 gameOver()
             } else {
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
 
                 if (question.answer != null)
                     etAnswer.setText(question.answer)
+                if (it == quizViewModel.quizInfo!!.questions.size - 1) {
+                    btnNext.text = getString(R.string.finish)
+                } else {
+                    btnNext.text = getString(R.string.next)
+                }
             }
         }
     }
